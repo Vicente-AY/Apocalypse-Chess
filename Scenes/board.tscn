@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://0kqhpdi4pu2b"]
+
+[ext_resource type="Texture2D" uid="uid://biwjevgg3e3a0" path="res://Assets/Chessboard_5x5_green.svg.webp" id="1_2wvcj"]
+[ext_resource type="Script" uid="uid://dfxdgl8h8favl" path="res://Scenes/chess.gd" id="2_uh3b8"]
+
+[node name="Board" type="Sprite2D" unique_id=659335136]
+position = Vector2(0, -480)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_2wvcj")
+centered = false
+script = ExtResource("2_uh3b8")
+metadata/_edit_lock_ = true
+
+[node name="Pieces" type="Node" parent="." unique_id=1496580826]
+
+[node name="Dots" type="Node" parent="." unique_id=178419001]
+
+[node name="Turn" type="Sprite2D" parent="." unique_id=1921611250]

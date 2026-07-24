@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bfwuq7jy5trur"]
+
+[ext_resource type="Script" uid="uid://bemr4gklhyw46" path="res://draw.gd" id="1_bdplv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qir10"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpmdx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjhlr"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wld83"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sta47"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qutpo"]
+
+[node name="draw" type="Control" unique_id=1055921033]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bdplv")
+
+[node name="Panel" type="Panel" parent="." unique_id=1310693331]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qir10")
+
+[node name="Panel2" type="Panel" parent="." unique_id=1282669155]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpmdx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1024162490]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 231.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 75
+text = "Draw!"
+horizontal_alignment = 1
+
+[node name="exit" type="Button" parent="." unique_id=1916178495]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -42.25
+offset_right = 123.5
+offset_bottom = 42.25
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_kjhlr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wld83")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sta47")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qutpo")
+text = "Main Menu"
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
