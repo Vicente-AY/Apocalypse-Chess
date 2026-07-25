@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://jiwch8dhnvmx"]
+
+[ext_resource type="Texture2D" uid="uid://bqukwswvwdvjw" path="res://Assets/imagenes_tutorial/imagen-tutorial_3-2.png" id="1_kuky2"]
+[ext_resource type="Script" uid="uid://berqqwtydtu8r" path="res://Scenes/tutorial_3.gd" id="1_n2y8d"]
+[ext_resource type="Texture2D" uid="uid://bkakimni41x65" path="res://Assets/imagenes_tutorial/imagen-tutorial_3-1.png" id="2_n2y8d"]
+
+[sub_resource type="GDScript" id="GDScript_udred"]
+script/source = "extends Panel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_exit_pressed() -> void:
+	pass # Replace with function body.
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udred"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tok8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xo111"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vm3w1"]
+
+[node name="tutorial_3" type="Control" unique_id=1099262165]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n2y8d")
+
+[node name="Panel" type="Panel" parent="." unique_id=1519966909]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_udred")
+
+[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=1363799151]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 55
+text = "MOVE TO THE SAME SQUARE"
+horizontal_alignment = 1
+
+[node name="text" type="RichTextLabel" parent="." unique_id=1527107068]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 119.0
+offset_right = -573.0
+offset_bottom = 454.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "If the pieces are diferent the knight captures the pawn and keep the position."
+
+[node name="exit" type="Button" parent="." unique_id=1198674051]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.5
+offset_top = -113.0
+offset_right = 123.5
+offset_bottom = -28.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_udred")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0tok8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo111")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vm3w1")
+text = "Exit"
+
+[node name="previous" type="Button" parent="." unique_id=283696456]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = 214.0
+offset_right = -433.0
+offset_bottom = 298.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_udred")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0tok8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo111")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vm3w1")
+text = "<"
+
+[node name="next" type="Button" parent="." unique_id=2003916935]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 423.0
+offset_top = 210.0
+offset_right = 501.0
+offset_bottom = 294.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_udred")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0tok8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo111")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vm3w1")
+text = ">"
+
+[node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=17144190]
+position = Vector2(995.125, 271.25)
+scale = Vector2(0.66604483, 0.5808824)
+texture = ExtResource("1_kuky2")
+
+[node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=1061744118]
+position = Vector2(721.00006, 269.5)
+scale = Vector2(0.6800001, 0.5819327)
+texture = ExtResource("2_n2y8d")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

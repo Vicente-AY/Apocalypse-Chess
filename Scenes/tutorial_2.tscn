@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://bb54jrbsd1gy0"]
+
+[ext_resource type="Script" uid="uid://b6kcxr623er4w" path="res://Scenes/tutorial_2.gd" id="1_ccwba"]
+[ext_resource type="Texture2D" uid="uid://dx8buglrkowdo" path="res://Assets/imagenes_tutorial/imagen-tutorial_2-2.png" id="1_gjaxk"]
+[ext_resource type="Texture2D" uid="uid://rxovwwql0ein" path="res://Assets/imagenes_tutorial/imagen-tutorial_2.png" id="2_ccwba"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y18cd"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62f66"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3duj"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd2he"]
+
+[node name="tutorial_2" type="Control" unique_id=1605191801]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ccwba")
+
+[node name="Panel" type="Panel" parent="." unique_id=2127579338]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=349641455]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 55
+text = "MOVE TO THE SAME SQUARE"
+horizontal_alignment = 1
+
+[node name="text" type="RichTextLabel" parent="." unique_id=1559994344]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 119.0
+offset_right = -573.0
+offset_bottom = 524.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "Pieces capture each other like in regular chess but, if both players end moving the same piece to the same position, both pieces are eliminated from the board.
+
+If two pawns try to capture each other both are eliminated"
+
+[node name="exit" type="Button" parent="." unique_id=1707440757]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.5
+offset_top = -113.0
+offset_right = 123.5
+offset_bottom = -28.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_y18cd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_62f66")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i3duj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rd2he")
+text = "Exit"
+
+[node name="previous" type="Button" parent="." unique_id=436229716]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = 214.0
+offset_right = -433.0
+offset_bottom = 298.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_y18cd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_62f66")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i3duj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rd2he")
+text = "<"
+
+[node name="next" type="Button" parent="." unique_id=22808047]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 423.0
+offset_top = 210.0
+offset_right = 501.0
+offset_bottom = 294.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_y18cd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_62f66")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i3duj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rd2he")
+text = ">"
+
+[node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=721152117]
+position = Vector2(995.125, 271.25)
+scale = Vector2(0.66604483, 0.5808824)
+texture = ExtResource("1_gjaxk")
+
+[node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=1315821599]
+position = Vector2(721.00006, 269.5)
+scale = Vector2(0.6800001, 0.5819327)
+texture = ExtResource("2_ccwba")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

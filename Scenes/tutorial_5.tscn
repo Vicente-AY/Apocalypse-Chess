@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://clre2ixlft678"]
+
+[ext_resource type="Script" uid="uid://ccde8l80piaq5" path="res://Scenes/tutorial_5.gd" id="1_4cvbd"]
+[ext_resource type="Texture2D" uid="uid://bp376ded060bw" path="res://Assets/imagenes_tutorial/imagen-tutorial_5-2.png" id="1_oy4ks"]
+[ext_resource type="Texture2D" uid="uid://cfbqhtlgb0fut" path="res://Assets/imagenes_tutorial/imagen-tutorial_5-1.png" id="2_4cvbd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8sf7"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mp16"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpxpa"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7o36j"]
+
+[node name="tutorial_5" type="Control" unique_id=1777889880]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4cvbd")
+
+[node name="Panel" type="Panel" parent="." unique_id=1614221563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=1471696910]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 55
+text = "ILLEGAL MOVES"
+horizontal_alignment = 1
+
+[node name="text" type="RichTextLabel" parent="." unique_id=916403351]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 119.0
+offset_right = -573.0
+offset_bottom = 479.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "You can try to make an illegal move expecting your opponent to move a piece but, the adversary finally dont, you are commiting an illegal move.
+
+2 illegal moves is game over"
+
+[node name="exit" type="Button" parent="." unique_id=1836835380]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.5
+offset_top = -113.0
+offset_right = 123.5
+offset_bottom = -28.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+text = "Exit"
+
+[node name="previous" type="Button" parent="." unique_id=1866460331]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = 214.0
+offset_right = -433.0
+offset_bottom = 298.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+text = "<"
+
+[node name="next" type="Button" parent="." unique_id=1088257124]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 423.0
+offset_top = 210.0
+offset_right = 501.0
+offset_bottom = 294.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+text = ">"
+
+[node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=1526183761]
+position = Vector2(995.125, 271.25)
+scale = Vector2(0.66604483, 0.5808824)
+texture = ExtResource("1_oy4ks")
+
+[node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=1424664124]
+position = Vector2(709, 274)
+scale = Vector2(0.6800001, 0.5819327)
+texture = ExtResource("2_4cvbd")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

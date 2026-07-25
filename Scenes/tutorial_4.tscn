@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://biio4t0uhutju"]
+
+[ext_resource type="Script" uid="uid://qyrjvq875epu" path="res://Scenes/tutorial_4.gd" id="1_bkars"]
+[ext_resource type="Texture2D" uid="uid://b0t4q4bibkvni" path="res://Assets/imagenes_tutorial/imagen-tutorial_4-2.png" id="1_ckr3u"]
+[ext_resource type="Texture2D" uid="uid://d1sh5l77pb6g" path="res://Assets/imagenes_tutorial/imagen-tutorial_4-1.png" id="2_bkars"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7gt6"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5twu"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkxxn"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8ldc"]
+
+[node name="tutorial_4" type="Control" unique_id=1230256734]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bkars")
+
+[node name="Panel" type="Panel" parent="." unique_id=685125131]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=211475363]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 55
+text = "NO-CAPTURE"
+horizontal_alignment = 1
+
+[node name="text" type="RichTextLabel" parent="." unique_id=1864478271]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 119.0
+offset_right = -573.0
+offset_bottom = 454.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 35
+text = "If a pawn tries to capture a piece and the target piece moves away, the pawn still moves diagonally capturing nothing"
+
+[node name="exit" type="Button" parent="." unique_id=1373682503]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.5
+offset_top = -113.0
+offset_right = 123.5
+offset_bottom = -28.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7gt6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w5twu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rkxxn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a8ldc")
+text = "Exit"
+
+[node name="previous" type="Button" parent="." unique_id=1854876256]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = 214.0
+offset_right = -433.0
+offset_bottom = 298.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7gt6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w5twu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rkxxn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a8ldc")
+text = "<"
+
+[node name="next" type="Button" parent="." unique_id=1547322074]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 423.0
+offset_top = 210.0
+offset_right = 501.0
+offset_bottom = 294.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_b7gt6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w5twu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rkxxn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a8ldc")
+text = ">"
+
+[node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=2136557319]
+position = Vector2(995.125, 271.25)
+scale = Vector2(0.66604483, 0.5808824)
+texture = ExtResource("1_ckr3u")
+
+[node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=921973412]
+position = Vector2(721.00006, 269.5)
+scale = Vector2(0.6800001, 0.5819327)
+texture = ExtResource("2_bkars")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

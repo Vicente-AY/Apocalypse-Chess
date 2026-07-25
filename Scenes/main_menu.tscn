@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dfemfyef6d11y"]
 
 [ext_resource type="Script" uid="uid://2g3uiyjlvwl3" path="res://Scenes/main_menu.gd" id="1_28flt"]
+[ext_resource type="FontFile" uid="uid://bkdxuslyvi5bu" path="res://Assets/Eater-Regular.ttf" id="2_48xlc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dk1x"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1x27l"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrfnm"]
 bg_color = Color(1, 1, 1, 1)
@@ -43,7 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0dk1x")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1x27l")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=623590354]
 layout_mode = 1
@@ -52,9 +54,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -162.5
-offset_bottom = 162.5
+offset_left = -467.0
+offset_top = -162.0
+offset_right = -27.0
+offset_bottom = 163.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 14
@@ -97,6 +100,18 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_erv1k")
 text = "Exit"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=216016423]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 170.0
+offset_right = 659.0
+offset_bottom = 481.0
+theme_override_fonts/normal_font = ExtResource("2_48xlc")
+theme_override_font_sizes/normal_font_size = 75
+text = "Apocalypse 
+Chess"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/new_game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/tutorial" to="." method="_on_tutorial_pressed"]
