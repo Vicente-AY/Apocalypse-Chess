@@ -340,7 +340,7 @@ func get_moves():
 func get_pawn_moves():
 	
 	var _moves = []
-	var directions
+	var directions = Vector2()
 	var count = count_pieces()
 	var is_blocked = false
 	
@@ -469,6 +469,50 @@ func count_pieces() -> Dictionary:
 				counts["black_knights"] += 1
 	return counts
 
+func get_pawn_legal_moves(count: Dictionary, piece: Vector2, is_white: bool):
+	
+	var directions = Vector2()
+	var _moves = []
+	
+	if(is_white):
+		directions = Vector2(1, 0)
+	else:
+		directions = Vector2(-1, 0)
+	
+	var pos = piece + directions
+	if ((is_valid_pos(pos) && is_empty(pos))
+		&& !((white && pos.x == BOARD_SIZE -1 && count["white_pawns"] == 1) 
+		|| (!white && pos.x == 0 && count["black_pawns"] == 1))):
+		_moves.append(pos)
+	
+	pos = piece + Vector2(directions.x, 1)
+	if (is_valid_pos(pos) && (is_enemy(pos))):
+		_moves.append(pos)
+	pos = piece + Vector2(directions.x, -1)
+	if (is_valid_pos(pos) && (is_enemy(pos))):
+		_moves.append(pos)
+	
+	return _moves
+
+func get_knight_legal_moves(piece: Vector2, is_white: bool):
+	
+	var _moves = []
+	var directions = [Vector2(2, 1), Vector2(2, -1), Vector2(1, 2), Vector2(-1, 2),
+	Vector2(-2, 1), Vector2(-2, -1), Vector2(-1, -2), Vector2(1, -2)]
+	
+	for i in directions:
+		var pos = piece + i
+		if (is_valid_pos(pos) && (is_empty(pos) || (is_enemy_of(pos, is_white)))):
+			_moves.append(pos)
+		
+	return _moves
+
+func is_enemy_of(pos, is_white):
+	
+	if(is_white):
+		return board[pos.x][pos.y] < 0
+	return board[pos.x][pos.y] > 0
+
 func check_victory():
 	
 	var count = count_pieces()
@@ -485,3 +529,31 @@ func check_victory():
 		print("Black Victory!")
 		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
 		return
+	
+	var white_has_move = false
+	var black_has_move = false
+	var piece = null
+	
+	for i in BOARD_SIZE:
+		for j in BOARD_SIZE:
+			if (board[i][j] != 0):
+				piece = Vector2(i, j)
+			match board[i][j]:
+				1: if !(get_pawn_legal_moves(count, piece, true).is_empty()):
+					white_has_move = true
+				-1: if !(get_pawn_legal_moves(count, piece, false).is_empty()):
+					black_has_move = true
+				2: if !(get_knight_legal_moves(piece, true).is_empty()):
+					white_has_move = true
+				-2: if !(get_knight_legal_moves(piece, false).is_empty()):
+					black_has_move = true
+	
+	if(!white_has_move && !black_has_move):
+		print("Draw!")
+		get_tree().change_scene_to_file("res://Scenes/draw.tscn")
+	elif(!white_has_move):
+		print("Black Victory!")
+		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
+	elif(!black_has_move):
+		print("White Victory!")
+		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
