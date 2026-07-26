@@ -64,7 +64,7 @@ offset_right = -585.0
 offset_bottom = 479.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 35
-text = "Two players can draw a game if they lose their last pawn or make a second illegal movement at the same time."
+text = "Two players can draw a game if they lose their last pawn, make a second illegal movement or has no legal movement at the same time."
 
 [node name="exit" type="Button" parent="." unique_id=1472380932]
 layout_mode = 1

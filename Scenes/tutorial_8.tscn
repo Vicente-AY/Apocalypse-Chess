@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bsksoqyrtkqa"]
 
-[ext_resource type="Texture2D" uid="uid://clu0tq7rjvbmh" path="res://Assets/imagenes_tutorial/imagen-tutorial_8-2.png" id="1_4l1fu"]
 [ext_resource type="Script" uid="uid://dksbx5njgswg6" path="res://Scenes/tutorial_8.gd" id="1_e337w"]
 [ext_resource type="Texture2D" uid="uid://dboyfos1i2vf8" path="res://Assets/imagenes_tutorial/imagen-tutorial_8-1.png" id="2_e337w"]
+[ext_resource type="Texture2D" uid="uid://b0wcjf1skeq1m" path="res://Assets/imagenes_tutorial/imagen-tutorial_7-3.png" id="2_ovjmv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4l1fu"]
 bg_color = Color(1, 1, 1, 1)
@@ -143,7 +143,7 @@ text = ">"
 [node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=46594520]
 position = Vector2(995.125, 271.25)
 scale = Vector2(0.66604483, 0.5808824)
-texture = ExtResource("1_4l1fu")
+texture = ExtResource("2_ovjmv")
 
 [node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=1993302]
 position = Vector2(709, 274)
