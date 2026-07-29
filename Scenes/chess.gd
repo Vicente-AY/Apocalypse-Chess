@@ -21,11 +21,12 @@ var turn_num = 1
 @onready var dots = $Dots
 @onready var turn = $Turn
 
-@onready var white_moves_log: ItemList = $"../white_moves_log"
-@onready var black_moves_log: ItemList = $"../black_moves_log"
+@onready var white_scroll: ScrollContainer = $"../white_log/white_scroll"
+@onready var white_moves_log: VBoxContainer = $"../white_log/white_scroll/white_moves_log"
+@onready var black_scroll: ScrollContainer = $"../black_log/black_scroll"
+@onready var black_moves_log: VBoxContainer = $"../black_log/black_scroll/black_moves_log"
 
-
-
+const LOG_FONT_SIZE = 20
 
 var board : Array
 #true white turn, false black turn
@@ -708,14 +709,26 @@ func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool)
 	
 	var text = ""
 	
-	if(is_white):
-		text = translate_pos(_piece) + " -> " + translate_pos(_dest)
-	else:
-		text = translate_pos(_piece) + " -> " + translate_pos(_dest)
+	text = translate_pos(_piece) + " -> " + translate_pos(_dest)
 	
 	var log_text = "Turn " + str(turn_num) + " " + text + "\n"
 	
+	var label = Label.new()
+	label.text = log_text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.add_theme_font_size_override("font_size", LOG_FONT_SIZE)
+	label.add_theme_color_override("font_color", Color.BLACK if is_white else Color.WHITE)
+	
 	if(is_white):
-		white_moves_log.add_item(log_text)
+		white_moves_log.add_child(label)
+		_scroll_to_bottom(white_scroll)
 	else:
-		black_moves_log.add_item(log_text)
+		black_moves_log.add_child(label)
+		_scroll_to_bottom(black_scroll)
+
+func _scroll_to_bottom(scroll: ScrollContainer) -> void:
+	
+	await get_tree().process_frame
+	scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
