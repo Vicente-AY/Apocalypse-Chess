@@ -2,6 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://0kqhpdi4pu2b" path="res://Scenes/board.tscn" id="1_jjgbg"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dk1x"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijquq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv2x0"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrfnm"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Main" type="Node2D" unique_id=767903281]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1300902481]
@@ -11,3 +23,67 @@ zoom = Vector2(0.85, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1632539900]
 
 [node name="Board" parent="." unique_id=659335136 instance=ExtResource("1_jjgbg")]
+
+[node name="black_moves_log" type="ItemList" parent="." unique_id=1455329169]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1003.0
+offset_top = -487.0
+offset_right = 1350.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0dk1x")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1705744545]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1002.0
+offset_top = -648.0
+offset_right = 1347.0
+offset_bottom = -484.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_ijquq")
+text = "Black"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=328202308]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 707.0
+offset_top = -650.0
+offset_right = 1004.0
+offset_bottom = -486.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_pv2x0")
+text = "White"
+horizontal_alignment = 1
+
+[node name="white_moves_log" type="ItemList" parent="." unique_id=192627088]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 708.0
+offset_top = -488.0
+offset_right = 1004.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrfnm")
+allow_search = false

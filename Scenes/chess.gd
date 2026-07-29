@@ -15,9 +15,15 @@ const WPawn = preload("res://Assets/WPawn.svg")
 
 const PIECE_MOVE = preload("uid://byowoqtvl4a85")
 
+var turn_num = 1
+
 @onready var pieces = $Pieces
 @onready var dots = $Dots
 @onready var turn = $Turn
+
+@onready var white_moves_log: ItemList = $"../white_moves_log"
+@onready var black_moves_log: ItemList = $"../black_moves_log"
+
 
 
 
@@ -255,6 +261,9 @@ func resolve_turn():
 	#al final de ejecutar ambos turnos comprobamos si hay promocion de pieza y si hay ganador
 	promotion(white_piece_val, white_dest)
 	promotion(black_piece_val, black_dest)
+	write_log(white_piece, white_dest, white_piece_val, true)
+	write_log(black_piece, black_dest, black_piece_val, false)
+	turn_num += 1
 	check_victory()
 
 #funcion que comprueba si un movimiento es ilegal
@@ -672,6 +681,7 @@ func check_victory():
 				-2: if !(get_knight_legal_moves(piece, false).is_empty()):
 					black_has_move = true
 	
+	#regla adicional
 	#si ninguno de los jugadores tiene movimientos legales se establecen tablas
 	if(!white_has_move && !black_has_move):
 		print("Draw!")
@@ -683,3 +693,29 @@ func check_victory():
 	elif(!black_has_move):
 		print("White Victory!")
 		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
+
+#funcion que traduce un vector2 a un movimiento en el tablero
+func translate_pos(pos: Vector2):
+	
+	var cols = ["A", "B", "C", "D", "E"]
+	
+	var col_letter = cols[int(pos.y)]
+	var row_number = str(int(pos.x) +1)
+	
+	return col_letter + row_number
+
+func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool):
+	
+	var text = ""
+	
+	if(is_white):
+		text = translate_pos(_piece) + " -> " + translate_pos(_dest)
+	else:
+		text = translate_pos(_piece) + " -> " + translate_pos(_dest)
+	
+	var log_text = "Turn " + str(turn_num) + " " + text + "\n"
+	
+	if(is_white):
+		white_moves_log.add_item(log_text)
+	else:
+		black_moves_log.add_item(log_text)
