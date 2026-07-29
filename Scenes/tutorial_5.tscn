@@ -61,12 +61,12 @@ anchor_right = 1.0
 offset_left = 12.0
 offset_top = 119.0
 offset_right = -573.0
-offset_bottom = 479.0
+offset_bottom = 632.0
 grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 35
+theme_override_font_sizes/normal_font_size = 30
 text = "You can try to make an illegal move expecting your opponent to move a piece but, the adversary finally dont, you are commiting an illegal move.
 
-2 illegal moves is game over"
+2 illegal moves is game over. If a player dont have any legal movement at the end of the turn lose the game"
 
 [node name="exit" type="Button" parent="." unique_id=1836835380]
 layout_mode = 1
