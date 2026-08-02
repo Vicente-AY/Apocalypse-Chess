@@ -26,6 +26,12 @@ var turn_num = 1
 @onready var black_scroll: ScrollContainer = $"../black_log/black_scroll"
 @onready var black_moves_log: VBoxContainer = $"../black_log/black_scroll/black_moves_log"
 
+@onready var white_ilegal_move_1: Sprite2D = $"../white_log/white_ilegal_move_1"
+@onready var white_ilegal_move_2: Sprite2D = $"../white_log/white_ilegal_move_2"
+@onready var black_ilegal_move_1: Sprite2D = $"../black_log/black_ilegal_move_1"
+@onready var black_ilegal_move_2: Sprite2D = $"../black_log/black_ilegal_move_2"
+
+
 const LOG_FONT_SIZE = 20
 
 var board : Array
@@ -272,27 +278,38 @@ func ilegal_movement(_piece, _dest, _piece_val, enemy_piece):
 	
 	#guardamos el valor de destino (0 significa que esta vacio)
 	var destiny_val = board[_dest.x][_dest.y]
+	#variable que indica que jugador esta cometiendo el movimiento
+	var is_white = null
 	
 	#si la pieza es un peon y se mueve hacia adelante
 	#comprobamos que el destino no es 0 y ademas que no sea la pieza que mueve el rival
+	#si es un movimiento ilegal mostramos el indicador en pantalla
 	if(_piece_val == 1 && check_pawn_move_forward(_piece, _dest, _piece_val)):
+		is_white = true
 		if(_dest != enemy_piece && destiny_val != 0):
 			white_pen_points += 1
+			show_ilegal_moves(is_white)
 			print("White tried an illegal pawn capture")
 			return true
 	#comprobamos lo mismo para las negras
 	if(_piece_val == -1 && check_pawn_move_forward(_piece, _dest, _piece_val)):
+		is_white = false
 		if(_dest != enemy_piece && destiny_val != 0):
 			black_pen_points += 1
+			show_ilegal_moves(is_white)
 			print("Black tried an illegal pawn capture")
 			return true
 	#comprobamos que la pieza no se mueva a la casilla de una pieza aliada
 	if((_piece_val > 0 && destiny_val > 0)):
+		is_white = true
 		white_pen_points += 1
+		show_ilegal_moves(is_white)
 		print("White commited an illegal move")
 		return true
 	if(_piece_val < 0 && destiny_val < 0):
+		is_white = false
 		black_pen_points += 1
+		show_ilegal_moves(is_white)
 		print("Black commited an illegal move")
 		return true
 	
@@ -354,6 +371,9 @@ func same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, bl
 		#de ser así añadimos puntos de penalizacion a ambos jugadores
 			white_pen_points += 1
 			black_pen_points += 1
+			#mostramos ambos movimientos ilegales en pantalla
+			show_ilegal_moves(true)
+			show_ilegal_moves(false)
 			print("Both tried an illegal pawn capture")
 			return
 	
@@ -390,10 +410,12 @@ func promotion(moving_piece, _dest):
 	
 	#contamos las piezas actualmente en el tablero
 	var count = count_pieces()
+	var is_white = null
 	
 	#white pawn promotion
 	#comprobamos si el peon ha llegado al final de su tablero
 	if((moving_piece == 1 && _dest.x == BOARD_SIZE -1) && (board[_dest.x][_dest.y] == 1)):
+		is_white = true
 		#establecemos la validez de la promocion en funcion de las reglas de apocapyse chess
 		if(count["white_knights"] < 2 && count["white_pawns"] > 1):
 			board[_dest.x][_dest.y] = 2
@@ -404,9 +426,11 @@ func promotion(moving_piece, _dest):
 			board[_dest.x][_dest.y] = 0
 			board[_dest.x -1][_dest.y] = moving_piece
 			white_pen_points += 1
+			show_ilegal_moves(is_white)
 	#promotion black pawn
 	#establecemos lo mismo para las piezas negras variando los valores de referencia
 	if((moving_piece == -1 && _dest.x == 0) && (board[_dest.x][_dest.y] == -1)):
+		is_white = false
 		if(count["black_knights"] < 2 && count["black_pawns"] > 1):
 			board[_dest.x][_dest.y] = -2
 			print("Pawn promoted!")
@@ -415,6 +439,7 @@ func promotion(moving_piece, _dest):
 			board[_dest.x][_dest.y] = 0
 			board[_dest.x +1][_dest.y] = moving_piece
 			black_pen_points += 1
+			show_ilegal_moves(is_white)
 
 #funcion que devuelve los movimientos que puede hacer una pieza en funcion de su valor
 #si es un valor 1 devolverá los movimientos de un peon, en caso de ser un 2 los del caballero
@@ -673,6 +698,7 @@ func check_victory():
 				piece = Vector2(i, j)
 			#buscamos si la pieza seleccionada tiene movimientos legales o no
 			match board[i][j]:
+				#pasamos true como parametro si la pieza es blanca, false si es negra
 				1: if !(get_pawn_legal_moves(count, piece, true).is_empty()):
 					white_has_move = true
 				-1: if !(get_pawn_legal_moves(count, piece, false).is_empty()):
@@ -728,7 +754,23 @@ func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool)
 		black_moves_log.add_child(label)
 		_scroll_to_bottom(black_scroll)
 
+#funcion auxiliar que se encarga de scrolear automaticamente el listado de
+#movimientos
 func _scroll_to_bottom(scroll: ScrollContainer) -> void:
 	
 	await get_tree().process_frame
 	scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
+
+#funcion que se encarga de mostrar el grafico indicativo de los movimientos ilegales de cada jugador
+func show_ilegal_moves(is_white):
+	
+	if(is_white):
+		if(white_pen_points == 1):
+			white_ilegal_move_1.show()
+		else:
+			white_ilegal_move_2.show()
+	else:
+		if(black_pen_points == 1):
+			black_ilegal_move_1.show()
+		else:
+			black_ilegal_move_2.show()

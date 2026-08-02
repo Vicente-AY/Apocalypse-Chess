@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://0kqhpdi4pu2b" path="res://Scenes/board.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://ccxwd2dtsvw5l" path="res://Scenes/white_log.gd" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://twm51qmaeuva" path="res://Scenes/black_log.gd" id="3_8gbba"]
+[ext_resource type="Texture2D" uid="uid://cqpbcas5hrddp" path="res://Assets/ilegal_move.png" id="3_jjvhh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv2x0"]
 bg_color = Color(1, 1, 1, 1)
@@ -48,6 +49,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pv2x0")
 text = "White"
 horizontal_alignment = 1
 
+[node name="white_ilegal_move_1" type="Sprite2D" parent="white_log" unique_id=1455145490]
+visible = false
+position = Vector2(93, -44)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
+[node name="white_ilegal_move_2" type="Sprite2D" parent="white_log" unique_id=347414518]
+visible = false
+position = Vector2(185, -44)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
 [node name="white_scroll" type="ScrollContainer" parent="white_log" unique_id=805103689]
 layout_mode = 0
 offset_right = 293.0
@@ -87,3 +100,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_43183")
 
 [node name="black_moves_log" type="VBoxContainer" parent="black_log/black_scroll" unique_id=1486097142]
 layout_mode = 2
+
+[node name="black_ilegal_move_1" type="Sprite2D" parent="black_log" unique_id=977253117]
+visible = false
+position = Vector2(124, -42.799988)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
+[node name="black_ilegal_move_2" type="Sprite2D" parent="black_log" unique_id=1156879097]
+visible = false
+position = Vector2(216, -42.799988)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
