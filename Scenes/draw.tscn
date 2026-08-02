@@ -61,12 +61,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_kpmdx")
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1024162490]
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 14.0
 offset_top = 30.0
+offset_right = 14.0
 offset_bottom = 231.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 75
-text = "Draw!"
+bbcode_enabled = true
+text = "[color=white]Dr[/color][color=black]aw![/color]"
 horizontal_alignment = 1
 
 [node name="exit" type="Button" parent="." unique_id=1916178495]
