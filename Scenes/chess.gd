@@ -19,6 +19,8 @@ const white_win_scene = preload("res://Scenes/white_win.tscn")
 const black_win_scene = preload("res://Scenes/black_win.tscn")
 const draw_scene = preload("res://Scenes/draw.tscn")
 
+var endgame_instance: Window = null
+
 var turn_num = 1
 
 @onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
@@ -37,6 +39,7 @@ var turn_num = 1
 @onready var black_ilegal_move_1: Sprite2D = $"../black_log/black_ilegal_move_1"
 @onready var black_ilegal_move_2: Sprite2D = $"../black_log/black_ilegal_move_2"
 
+@onready var reopen_button: Button = $"../reopen_button"
 
 const LOG_FONT_SIZE = 20
 
@@ -66,6 +69,8 @@ var finished = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	reopen_button.pressed.connect(_on_reopen_button_pressed)
 	
 	centered = false
 	
@@ -757,10 +762,21 @@ func check_victory():
 
 func show_end_screen(scene: PackedScene) -> void:
 	
-	print("antes", canvas_layer.get_child_count())
-	var instance = scene.instantiate()
-	canvas_layer.add_child(instance)
-	print("despues", canvas_layer.get_child_count())
+	endgame_instance = scene.instantiate()
+	canvas_layer.add_child(endgame_instance)
+	endgame_instance.show()
+	endgame_instance.close_requested.connect(_on_end_screen_closed)
+	
+
+func _on_reopen_button_pressed() -> void:
+	
+	endgame_instance.show()
+	reopen_button.hide()
+
+func _on_end_screen_closed() -> void:
+	
+	endgame_instance.hide()
+	reopen_button.show()
 
 #funcion que traduce un vector2 a un movimiento en el tablero
 func translate_pos(pos: Vector2):

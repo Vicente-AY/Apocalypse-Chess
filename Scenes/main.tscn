@@ -17,6 +17,29 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_43183"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
+bg_color = Color(0.7046392, 0.7046392, 0.70463914, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kry3j"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21xkr"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bp64"]
+
 [node name="Main" type="Node2D" unique_id=767903281]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1300902481]
@@ -112,3 +135,21 @@ visible = false
 position = Vector2(216, -42.799988)
 scale = Vector2(0.1, 0.096)
 texture = ExtResource("3_jjvhh")
+
+[node name="reopen_button" type="Button" parent="." unique_id=1692866340]
+visible = false
+offset_left = 596.0
+offset_top = -355.0
+offset_right = 797.0
+offset_bottom = -302.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_jjvhh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kry3j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_21xkr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6bp64")
+text = "Reopen end 
+game screen"
