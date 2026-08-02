@@ -18,4 +18,4 @@ func _on_previous_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/tutorial_4.tscn")
 
 func _on_next_pressed() -> void:
-		get_tree().change_scene_to_file("res://Scenes/tutorial_6.tscn")
+		get_tree().change_scene_to_file("res://Scenes/tutorial_5_1.tscn")

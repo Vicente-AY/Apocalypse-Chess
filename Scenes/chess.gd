@@ -51,6 +51,13 @@ var black_pen_points = 0
 var white_move = []
 var black_move = []
 
+#variable que indica que el juego ha finalizado y su resultado
+var finished = {
+	"w_win": false,
+	"b_win": false,
+	"draw": false
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -83,7 +90,7 @@ func _input(event):
 	if !(event is InputEventMouseButton && event.pressed && event.button_index == MOUSE_BUTTON_LEFT):
 		return
 	#si clica fuera del tablero borramos todo, volvemos al modo de seleccionar pieza y no hacemos nada
-	if is_mouse_out(): 
+	if (is_mouse_out() || (finished["w_win"] || finished["b_win"] || finished["draw"])): 
 		selectPiece = true
 		delete_available_moves()
 		return
@@ -222,15 +229,16 @@ func resolve_turn():
 	var white_piece = white_move[0]
 	var white_dest = white_move[1]
 	var white_piece_val = board[white_piece.x][white_piece.y]
-	var white_ilegal = false
-	var white_ilegal_prom = false
 	
 	var black_piece = black_move[0]
 	var black_dest = black_move[1]
 	var black_piece_val = board[black_piece.x][black_piece.y]
+	
+	#variables si los jugadores realizan algún movimiento ilegal
+	var white_ilegal = false
+	var white_ilegal_prom = false
 	var black_ilegal = false
 	var black_ilegal_prom = false
-	
 	var ilegal_double_pawn_cap = false
 	
 	#resultado de si dos piezas caen en en la misma posicion
@@ -687,16 +695,19 @@ func check_victory():
 	if ((count["black_pawns"] < 1 && count["white_pawns"] < 1) || (white_pen_points > 1 && black_pen_points > 1)):
 		print("Draw!")
 		get_tree().change_scene_to_file("res://Scenes/draw.tscn")
+		finished["draw"] = true
 		return
 	#en caso que se eliminen antes todos los peones de un jugador o alguno llege a dos puntos de penalizacion
 	#cambiamos la escena para dicho jugador
 	if (count["black_pawns"] < 1  || black_pen_points > 1):
 		print("White Victory!")
 		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
+		finished["w_win"] = true
 		return
 	if (count["white_pawns"] < 1 || white_pen_points > 1):
 		print("Black Victory!")
 		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
+		finished["b_win"] = true
 		return
 	
 	#establecemos la otra forma de victoria mediante si tienen o no movimientos legales
@@ -727,13 +738,16 @@ func check_victory():
 	if(!white_has_move && !black_has_move):
 		print("Draw!")
 		get_tree().change_scene_to_file("res://Scenes/draw.tscn")
+		finished["draw"] = true
 	#si un jugador se queda sin movimientos legales ganará el otro jugador
 	elif(!white_has_move):
 		print("Black Victory!")
 		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
+		finished["b_win"] = true
 	elif(!black_has_move):
 		print("White Victory!")
 		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
+		finished["w_win"] = true
 
 #funcion que traduce un vector2 a un movimiento en el tablero
 func translate_pos(pos: Vector2):
@@ -761,6 +775,7 @@ func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool,
 	label.add_theme_font_size_override("font_size", LOG_FONT_SIZE)
 	label.add_theme_color_override("font_color", Color.BLACK if is_white else Color.WHITE)
 	
+	#comprobamos si hay movimiento o promocion ilegal o si ambos jugadores han intentando captuarse ilegalmente
 	if (ilegal_m || ilegal_prom || double_pawn_c):
 		var background = StyleBoxFlat.new()
 		background.bg_color = Color.RED
@@ -775,7 +790,6 @@ func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool,
 		_scroll_to_bottom(black_scroll)
 	
 	return label
-
 
 #funcion auxiliar que se encarga de scrolear automaticamente el listado de
 #movimientos

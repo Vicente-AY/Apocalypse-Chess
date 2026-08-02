@@ -1,42 +1,41 @@
-[gd_scene format=3 uid="uid://clre2ixlft678"]
+[gd_scene format=3 uid="uid://4uelw7v1mxab"]
 
-[ext_resource type="Script" uid="uid://ccde8l80piaq5" path="res://Scenes/tutorial_5.gd" id="1_4cvbd"]
-[ext_resource type="Texture2D" uid="uid://bp376ded060bw" path="res://Assets/imagenes_tutorial/imagen-tutorial_5-2.png" id="1_oy4ks"]
-[ext_resource type="Texture2D" uid="uid://cfbqhtlgb0fut" path="res://Assets/imagenes_tutorial/imagen-tutorial_5-1.png" id="2_4cvbd"]
+[ext_resource type="Script" uid="uid://dx5cf8jgfh5xn" path="res://Scenes/tutorial_5_1.gd" id="1_58pdk"]
+[ext_resource type="Texture2D" uid="uid://ybl3anwrcxlp" path="res://Assets/imagenes_tutorial/tutorial.png" id="2_jn7ie"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8sf7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2ik3"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mp16"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7rna"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpxpa"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbinx"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7o36j"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqd4p"]
 
-[node name="tutorial_5" type="Control" unique_id=1777889880]
+[node name="tutorial_5-1" type="Control" unique_id=72033965]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4cvbd")
+script = ExtResource("1_58pdk")
 
-[node name="Panel" type="Panel" parent="." unique_id=1614221563]
+[node name="Panel" type="Panel" parent="." unique_id=1840356692]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +43,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=1471696910]
+[node name="tutorial_text" type="RichTextLabel" parent="." unique_id=1579448817]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -54,7 +53,7 @@ theme_override_font_sizes/normal_font_size = 55
 text = "ILLEGAL MOVES"
 horizontal_alignment = 1
 
-[node name="text" type="RichTextLabel" parent="." unique_id=916403351]
+[node name="text" type="RichTextLabel" parent="." unique_id=1619684126]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -64,9 +63,11 @@ offset_right = -573.0
 offset_bottom = 632.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 30
-text = "You can try to make an illegal move expecting your opponent to move a piece but, if the adversary finally dont, you are commiting an illegal move."
+text = "The ilegal move marks are indicated with a square right below the player´s  colour 
 
-[node name="exit" type="Button" parent="." unique_id=1836835380]
+2 illegal moves is game over. If a player dont have any legal movement at the end of the turn lose the game"
+
+[node name="exit" type="Button" parent="." unique_id=212416546]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -84,13 +85,13 @@ theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.009310354
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
-theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2ik3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p7rna")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lbinx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nqd4p")
 text = "Exit"
 
-[node name="previous" type="Button" parent="." unique_id=1866460331]
+[node name="previous" type="Button" parent="." unique_id=1450523804]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,13 +109,13 @@ theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.009310354
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
-theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2ik3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p7rna")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lbinx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nqd4p")
 text = "<"
 
-[node name="next" type="Button" parent="." unique_id=1088257124]
+[node name="next" type="Button" parent="." unique_id=2083490578]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,21 +133,16 @@ theme_override_colors/font_color = Color(0.0093103545, 0.0093103545, 0.009310354
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 38
-theme_override_styles/normal = SubResource("StyleBoxFlat_j8sf7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8mp16")
-theme_override_styles/hover = SubResource("StyleBoxFlat_fpxpa")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_7o36j")
+theme_override_styles/normal = SubResource("StyleBoxFlat_h2ik3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_p7rna")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lbinx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nqd4p")
 text = ">"
 
-[node name="ImagenTutorial22" type="Sprite2D" parent="." unique_id=1526183761]
-position = Vector2(995.125, 271.25)
-scale = Vector2(0.66604483, 0.5808824)
-texture = ExtResource("1_oy4ks")
-
-[node name="ImagenTutorial2" type="Sprite2D" parent="." unique_id=1424664124]
-position = Vector2(709, 274)
-scale = Vector2(0.6800001, 0.5819327)
-texture = ExtResource("2_4cvbd")
+[node name="Tutorial" type="Sprite2D" parent="." unique_id=627308407]
+position = Vector2(879, 259)
+scale = Vector2(1.1328125, 1.6938776)
+texture = ExtResource("2_jn7ie")
 
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="previous" to="." method="_on_previous_pressed"]
