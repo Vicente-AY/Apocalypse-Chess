@@ -28,17 +28,14 @@ corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6tpxk"]
 
-[node name="black_win" type="Control" unique_id=332992486]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="black_win" type="Window" unique_id=2057693754]
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(360, 360)
+always_on_top = true
 script = ExtResource("1_1oarn")
 
 [node name="Panel" type="Panel" parent="." unique_id=1006625570]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,7 +44,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xrfnm")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=41225365]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 30.0
@@ -55,20 +51,19 @@ offset_bottom = 231.0
 grow_horizontal = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 75
-text = "Black wins the game!"
+text = "Black wins!"
 horizontal_alignment = 1
 
 [node name="exit" type="Button" parent="." unique_id=394919224]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -123.5
-offset_top = -42.25
-offset_right = 123.5
-offset_bottom = 42.25
+offset_left = -121.0
+offset_top = 68.0
+offset_right = 126.0
+offset_bottom = 152.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3

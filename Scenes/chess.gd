@@ -15,7 +15,13 @@ const WPawn = preload("res://Assets/WPawn.svg")
 
 const PIECE_MOVE = preload("uid://byowoqtvl4a85")
 
+const white_win_scene = preload("res://Scenes/white_win.tscn")
+const black_win_scene = preload("res://Scenes/black_win.tscn")
+const draw_scene = preload("res://Scenes/draw.tscn")
+
 var turn_num = 1
+
+@onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
 
 @onready var pieces = $Pieces
 @onready var dots = $Dots
@@ -694,20 +700,20 @@ func check_victory():
 	#lo clasificamos como empate y cambiamos la escena a la de empate
 	if ((count["black_pawns"] < 1 && count["white_pawns"] < 1) || (white_pen_points > 1 && black_pen_points > 1)):
 		print("Draw!")
-		get_tree().change_scene_to_file("res://Scenes/draw.tscn")
 		finished["draw"] = true
+		show_end_screen(draw_scene)
 		return
 	#en caso que se eliminen antes todos los peones de un jugador o alguno llege a dos puntos de penalizacion
 	#cambiamos la escena para dicho jugador
 	if (count["black_pawns"] < 1  || black_pen_points > 1):
 		print("White Victory!")
-		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
 		finished["w_win"] = true
+		show_end_screen(white_win_scene)
 		return
 	if (count["white_pawns"] < 1 || white_pen_points > 1):
 		print("Black Victory!")
-		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
 		finished["b_win"] = true
+		show_end_screen(black_win_scene)
 		return
 	
 	#establecemos la otra forma de victoria mediante si tienen o no movimientos legales
@@ -737,17 +743,24 @@ func check_victory():
 	#si ninguno de los jugadores tiene movimientos legales se establecen tablas
 	if(!white_has_move && !black_has_move):
 		print("Draw!")
-		get_tree().change_scene_to_file("res://Scenes/draw.tscn")
 		finished["draw"] = true
+		show_end_screen(draw_scene)
 	#si un jugador se queda sin movimientos legales ganará el otro jugador
 	elif(!white_has_move):
 		print("Black Victory!")
-		get_tree().change_scene_to_file("res://Scenes/black_win.tscn")
 		finished["b_win"] = true
+		show_end_screen(black_win_scene)
 	elif(!black_has_move):
 		print("White Victory!")
-		get_tree().change_scene_to_file("res://Scenes/white_win.tscn")
 		finished["w_win"] = true
+		show_end_screen(white_win_scene)
+
+func show_end_screen(scene: PackedScene) -> void:
+	
+	print("antes", canvas_layer.get_child_count())
+	var instance = scene.instantiate()
+	canvas_layer.add_child(instance)
+	print("despues", canvas_layer.get_child_count())
 
 #funcion que traduce un vector2 a un movimiento en el tablero
 func translate_pos(pos: Vector2):
