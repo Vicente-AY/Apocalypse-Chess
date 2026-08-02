@@ -2,7 +2,8 @@ extends Sprite2D
 
 #constantes del juego
 const BOARD_SIZE = 5
-const CELL_WIDTH = 96
+const CELL_WIDTH = 128
+const BOARD_PIXEL_SIZE = 640
 
 #texturas
 const TEXTURE_HOLDER = preload("res://Scenes/texture_holder.tscn")
@@ -22,24 +23,23 @@ const draw_scene = preload("res://Scenes/draw.tscn")
 var endgame_instance: Window = null
 
 var turn_num = 1
-
-@onready var canvas_layer: CanvasLayer = $"../CanvasLayer"
+@onready var canvas_layer: CanvasLayer = $"../../../.."
 
 @onready var pieces = $Pieces
 @onready var dots = $Dots
 @onready var turn = $Turn
 
-@onready var white_scroll: ScrollContainer = $"../white_log/white_scroll"
-@onready var white_moves_log: VBoxContainer = $"../white_log/white_scroll/white_moves_log"
-@onready var black_scroll: ScrollContainer = $"../black_log/black_scroll"
-@onready var black_moves_log: VBoxContainer = $"../black_log/black_scroll/black_moves_log"
+@onready var white_scroll: ScrollContainer = $"../../../right_panel/white_log/white_scroll"
+@onready var white_moves_log: VBoxContainer = $"../../../right_panel/white_log/white_scroll/white_moves_log"
+@onready var black_scroll: ScrollContainer = $"../../../right_panel/black_log/black_scroll"
+@onready var black_moves_log: VBoxContainer = $"../../../right_panel/black_log/black_scroll/black_moves_log"
 
-@onready var white_ilegal_move_1: Sprite2D = $"../white_log/white_ilegal_move_1"
-@onready var white_ilegal_move_2: Sprite2D = $"../white_log/white_ilegal_move_2"
-@onready var black_ilegal_move_1: Sprite2D = $"../black_log/black_ilegal_move_1"
-@onready var black_ilegal_move_2: Sprite2D = $"../black_log/black_ilegal_move_2"
+@onready var white_ilegal_move_1: Sprite2D = $"../../../right_panel/white_log/white_ilegal_move_1"
+@onready var white_ilegal_move_2: Sprite2D = $"../../../right_panel/white_log/white_ilegal_move_2"
+@onready var black_ilegal_move_1: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_1"
+@onready var black_ilegal_move_2: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_2"
 
-@onready var reopen_button: Button = $"../reopen_button"
+@onready var reopen_button: Button = $"../../../../reopen_button"
 
 const LOG_FONT_SIZE = 20
 
@@ -79,11 +79,11 @@ func _ready():
 	#-1 Black Pawn
 	#2 White Knight
 	#1 White Pawn
-	board.append([2, 1, 1, 1, 2])
-	board.append([1, 0, 0, 0, 1])
-	board.append([0, 0, 0, 0, 0])
-	board.append([-1, 0, 0, 0, -1])
 	board.append([-2, -1, -1, -1, -2])
+	board.append([-1, 0, 0, 0, -1])
+	board.append([0, 0, 0, 0, 0])
+	board.append([1, 0, 0, 0, 1])
+	board.append([2, 1, 1, 1, 2])
 	
 	display_board()
 
@@ -108,7 +108,7 @@ func _input(event):
 	
 	#si clica en posicion valida guardamos la posición del ratón
 	hMousePosition = abs(snapped(get_global_mouse_position().x, 0) / CELL_WIDTH)
-	vMousePosition = abs(snapped(get_global_mouse_position().y, 0)) / CELL_WIDTH
+	vMousePosition = int((abs(snapped(get_global_mouse_position().y, 0))) / CELL_WIDTH)
 	
 	#guardamos el valor de la pieza dependiendo de donde a hecho click el jugador
 	piece_value = board[vMousePosition][hMousePosition]
@@ -133,9 +133,9 @@ func _input(event):
 #funcion que establece si el ratón está dentro o fura del tablero
 func is_mouse_out():
 	if (get_global_mouse_position().x < 0 
-	|| get_global_mouse_position().x > 480
-	|| get_global_mouse_position().y > 0 
-	|| get_global_mouse_position().y < -480):
+	|| get_global_mouse_position().x > BOARD_PIXEL_SIZE
+	|| get_global_mouse_position().y < 0
+	|| get_global_mouse_position().y > BOARD_PIXEL_SIZE):
 		return true
 	return false
 
@@ -154,7 +154,7 @@ func put_pieces(i, j):
 	var holder = TEXTURE_HOLDER.instantiate()
 	holder.scale = Vector2(2, 2)
 	pieces.add_child(holder)
-	holder.global_position = Vector2(j * CELL_WIDTH + (CELL_WIDTH / 2), -i * CELL_WIDTH - (CELL_WIDTH / 2))
+	holder.global_position = Vector2(j * CELL_WIDTH + (CELL_WIDTH / 2), i * CELL_WIDTH + (CELL_WIDTH / 2))
 	
 	match board[i][j]:
 		-2: holder.texture = BKnight
@@ -344,7 +344,7 @@ func ilegal_movement(_piece, _dest, _piece_val, enemy_piece):
 func check_pawn_move_forward(_piece: Vector2, _dest: Vector2, _piece_val: int):
 	
 	#ejecutamos por separado un supuesto movimiento hacia adelante
-	var direction = Vector2(1,0) if _piece_val > 0 else Vector2(-1,0)
+	var direction = Vector2(-1,0) if _piece_val > 0 else Vector2(1,0)
 	
 	#si el movimiento anterior es igual al destino devolvemos true
 	return (_piece + direction) == _dest
@@ -441,7 +441,7 @@ func promotion(moving_piece, _dest):
 	
 	#white pawn promotion
 	#comprobamos si el peon ha llegado al final de su tablero
-	if((moving_piece == 1 && _dest.x == BOARD_SIZE -1) && (board[_dest.x][_dest.y] == 1)):
+	if((moving_piece == 1 && _dest.x == 0) && (board[_dest.x][_dest.y] == 1)):
 		is_white = true
 		#establecemos la validez de la promocion en funcion de las reglas de apocapyse chess
 		if(count["white_knights"] < 2 && count["white_pawns"] > 1):
@@ -458,7 +458,7 @@ func promotion(moving_piece, _dest):
 			return true
 	#promotion black pawn
 	#establecemos lo mismo para las piezas negras variando los valores de referencia
-	if((moving_piece == -1 && _dest.x == 0) && (board[_dest.x][_dest.y] == -1)):
+	if((moving_piece == -1 && _dest.x == BOARD_SIZE -1) && (board[_dest.x][_dest.y] == -1)):
 		is_white = false
 		if(count["black_knights"] < 2 && count["black_pawns"] > 1):
 			board[_dest.x][_dest.y] = -2
@@ -496,10 +496,10 @@ func get_pawn_moves():
 	#este no podrá moverlo al final del tablero, por lo que bloquearemos el movimiento y devolverá
 	#los movimientos de la funcion get_all_posible_moves()
 	if(white):
-		if(selected_piece.x == BOARD_SIZE -2 && count["white_knights"] > 1):
+		if(selected_piece.x == 1 && count["white_knights"] > 1):
 			is_blocked = true
 	else:
-		if(selected_piece.x == 1 && count["black_knights"] > 1):
+		if(selected_piece.x == BOARD_SIZE -2 && count["black_knights"] > 1):
 			is_blocked = true
 	
 	if(is_blocked):
@@ -509,9 +509,9 @@ func get_pawn_moves():
 	#si el turno es de las blancas las piezas se mueven hacia arriba
 	#de lo contrario se mueven hacia abajo
 	if(white):
-		directions = Vector2(1, 0)
-	else:
 		directions = Vector2(-1, 0)
+	else:
+		directions = Vector2(1, 0)
 	
 	#realizamos el supuesto movimiento en una variabla a parte
 	var pos = selected_piece + directions
@@ -542,7 +542,7 @@ func get_all_posible_moves():
 	for row in BOARD_SIZE:
 		#establecemos que si es la ultima fila para cada jugador, este no cuente
 		#como movimiento posible
-		if((white && row == BOARD_SIZE -1) || (!white && row == 0)):
+		if((white && row == 0) || (!white && row == BOARD_SIZE -1)):
 			continue
 		#si no es la ultima fila y la casilla está vacia lo añadimos como movimiento posible
 		for col in BOARD_SIZE:
@@ -616,7 +616,7 @@ func show_available_moves():
 		holder.scale = Vector2(0.01, 0.01)
 		
 		holder.global_position = Vector2(i.y * CELL_WIDTH + (CELL_WIDTH / 2),
-		 -i.x * CELL_WIDTH - (CELL_WIDTH / 2))
+		 i.x * CELL_WIDTH + (CELL_WIDTH / 2))
 
 #funcion que borra la textura del tablero
 func delete_available_moves():
@@ -651,16 +651,16 @@ func get_pawn_legal_moves(count: Dictionary, piece: Vector2, is_white: bool):
 	
 	#establecemos la direccion del peon segun el valor del booleano pasado por parametro
 	if(is_white):
-		directions = Vector2(1, 0)
-	else:
 		directions = Vector2(-1, 0)
+	else:
+		directions = Vector2(1, 0)
 	
 	#si la direccion es valida y esta vacia está vacia y no esta moviendo
 	#el ultimo peon del jugador a la ultima fila añadimos el movimiento a la lista
 	var pos = piece + directions
 	if ((is_valid_pos(pos) && is_empty(pos))
-		&& !((white && pos.x == BOARD_SIZE -1 && count["white_pawns"] == 1) 
-		|| (!white && pos.x == 0 && count["black_pawns"] == 1))):
+		&& !((is_white && pos.x == 0 && count["white_pawns"] == 1) 
+		|| (!is_white && pos.x == BOARD_SIZE -1 && count["black_pawns"] == 1))):
 		_moves.append(pos)
 	
 	#si el movimiento en diagonal valido y hay un enemigo añadimos el movimiento
