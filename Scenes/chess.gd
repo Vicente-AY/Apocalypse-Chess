@@ -51,7 +51,6 @@ var black_pen_points = 0
 var white_move = []
 var black_move = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -223,10 +222,16 @@ func resolve_turn():
 	var white_piece = white_move[0]
 	var white_dest = white_move[1]
 	var white_piece_val = board[white_piece.x][white_piece.y]
+	var white_ilegal = false
+	var white_ilegal_prom = false
 	
 	var black_piece = black_move[0]
 	var black_dest = black_move[1]
 	var black_piece_val = board[black_piece.x][black_piece.y]
+	var black_ilegal = false
+	var black_ilegal_prom = false
+	
+	var ilegal_double_pawn_cap = false
 	
 	#resultado de si dos piezas caen en en la misma posicion
 	var battle_res = 0
@@ -238,7 +243,7 @@ func resolve_turn():
 		#si el resultado da 0 significa que ambos jugadores movieron el mismo tipo de pieza
 		#si es 1 o -1, los jugadores movieron piezas diferentes
 		match battle_res:
-			0: same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val)
+			0: ilegal_double_pawn_cap = same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val)
 			1, -1: different_piece_battle(battle_res, white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val)
 	#si el movimiento se realiza hacia la misma casilla pero esta está ocupada realizamos la recaptura
 	elif(white_dest == black_dest && board[white_dest.x][white_dest.y] != 0):
@@ -249,12 +254,12 @@ func resolve_turn():
 			-1, -2: black_recapture(white_piece, black_piece, black_dest, black_piece_val)
 	#si dos peones intentan capturarse a si mismos lo tratamos como una batalla de pieza igual
 	elif(white_dest == black_piece && black_dest == white_piece && white_piece_val == 1 && black_piece_val == -1):
-		same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val)
+		ilegal_double_pawn_cap = same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val)
 	#si no hay choque entre piezas se realizan los movimientos pertinentes
 	else:
 		#comprobamos que los movimientos de ambos jugadores son legales
-		var white_ilegal = ilegal_movement(white_piece, white_dest, white_piece_val, black_piece)
-		var black_ilegal = ilegal_movement(black_piece, black_dest, black_piece_val, white_piece)
+		white_ilegal = ilegal_movement(white_piece, white_dest, white_piece_val, black_piece)
+		black_ilegal = ilegal_movement(black_piece, black_dest, black_piece_val, white_piece)
 		
 		#si ninguno de los jugadores ha realizado un movimiento ilegal realizamos el movimiento simultaneo
 		#si solo un jugador ha realizado un movimiento legal, movemos su pieza.
@@ -266,10 +271,11 @@ func resolve_turn():
 			no_battle(black_piece, black_dest, black_piece_val)
 	
 	#al final de ejecutar ambos turnos comprobamos si hay promocion de pieza y si hay ganador
-	promotion(white_piece_val, white_dest)
-	promotion(black_piece_val, black_dest)
-	write_log(white_piece, white_dest, white_piece_val, true)
-	write_log(black_piece, black_dest, black_piece_val, false)
+	white_ilegal_prom = promotion(white_piece_val, white_dest)
+	black_ilegal_prom = promotion(black_piece_val, black_dest)
+	#true/false, blancas/negras
+	write_log(white_piece, white_dest, white_piece_val, true, white_ilegal, white_ilegal_prom, ilegal_double_pawn_cap)
+	write_log(black_piece, black_dest, black_piece_val, false, black_ilegal, black_ilegal_prom, ilegal_double_pawn_cap)
 	turn_num += 1
 	check_victory()
 
@@ -375,7 +381,7 @@ func same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, bl
 			show_ilegal_moves(true)
 			show_ilegal_moves(false)
 			print("Both tried an illegal pawn capture")
-			return
+			return true
 	
 	#en caso contrario eliminamos el origen y destino de ambas piezas
 	board[white_piece.x][white_piece.y] = 0
@@ -385,6 +391,8 @@ func same_piece_battle(white_piece, white_dest, white_piece_val, black_piece, bl
 	board[black_dest.x][black_dest.y] = 0
 	
 	print("Battle at " + str(white_dest) + " Both eliminated")
+	
+	return false
 
 #funcion que ejecuta un movimiento a la misma casilla con piezas de valor diferente
 func different_piece_battle(battle_res, white_piece, white_dest, white_piece_val, black_piece, black_dest, black_piece_val):
@@ -420,6 +428,7 @@ func promotion(moving_piece, _dest):
 		if(count["white_knights"] < 2 && count["white_pawns"] > 1):
 			board[_dest.x][_dest.y] = 2
 			print("Pawn promoted!")
+			return false
 		#si no las cumple comete un movimiento ilegal y deshacemos el movimiento realizado
 		else:
 			print("Ilegal promotion")
@@ -427,6 +436,7 @@ func promotion(moving_piece, _dest):
 			board[_dest.x -1][_dest.y] = moving_piece
 			white_pen_points += 1
 			show_ilegal_moves(is_white)
+			return true
 	#promotion black pawn
 	#establecemos lo mismo para las piezas negras variando los valores de referencia
 	if((moving_piece == -1 && _dest.x == 0) && (board[_dest.x][_dest.y] == -1)):
@@ -434,12 +444,16 @@ func promotion(moving_piece, _dest):
 		if(count["black_knights"] < 2 && count["black_pawns"] > 1):
 			board[_dest.x][_dest.y] = -2
 			print("Pawn promoted!")
+			return false
 		else:
 			print("Ilegal promotion")
 			board[_dest.x][_dest.y] = 0
 			board[_dest.x +1][_dest.y] = moving_piece
 			black_pen_points += 1
 			show_ilegal_moves(is_white)
+			return true
+	
+	return false
 
 #funcion que devuelve los movimientos que puede hacer una pieza en funcion de su valor
 #si es un valor 1 devolverá los movimientos de un peon, en caso de ser un 2 los del caballero
@@ -731,7 +745,7 @@ func translate_pos(pos: Vector2):
 	
 	return col_letter + row_number
 
-func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool):
+func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool, ilegal_m: bool, ilegal_prom: bool, double_pawn_c: bool):
 	
 	var text = ""
 	
@@ -747,12 +761,21 @@ func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool)
 	label.add_theme_font_size_override("font_size", LOG_FONT_SIZE)
 	label.add_theme_color_override("font_color", Color.BLACK if is_white else Color.WHITE)
 	
+	if (ilegal_m || ilegal_prom || double_pawn_c):
+		var background = StyleBoxFlat.new()
+		background.bg_color = Color.RED
+		
+		label.add_theme_stylebox_override("normal", background)
+	
 	if(is_white):
 		white_moves_log.add_child(label)
 		_scroll_to_bottom(white_scroll)
 	else:
 		black_moves_log.add_child(label)
 		_scroll_to_bottom(black_scroll)
+	
+	return label
+
 
 #funcion auxiliar que se encarga de scrolear automaticamente el listado de
 #movimientos

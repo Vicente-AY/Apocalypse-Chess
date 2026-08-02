@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://s81fo5knu6ul"]
+
+[ext_resource type="PackedScene" uid="uid://0kqhpdi4pu2b" path="res://Scenes/board.tscn" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://ccxwd2dtsvw5l" path="res://Scenes/white_log.gd" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://twm51qmaeuva" path="res://Scenes/black_log.gd" id="3_8gbba"]
+[ext_resource type="Texture2D" uid="uid://cqpbcas5hrddp" path="res://Assets/ilegal_move.png" id="3_jjvhh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pv2x0"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqy2q"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijquq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_43183"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D" unique_id=767903281]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1300902481]
+position = Vector2(667, -325)
+zoom = Vector2(0.85, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1632539900]
+
+[node name="Board" parent="." unique_id=659335136 instance=ExtResource("1_jjgbg")]
+
+[node name="white_log" type="Control" parent="." unique_id=1227841426]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 710.0
+offset_top = -491.0
+offset_right = 1005.0
+offset_bottom = -1.0
+script = ExtResource("2_bo1nx")
+
+[node name="white_label" type="RichTextLabel" parent="white_log" unique_id=328202308]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -159.0
+offset_bottom = 5.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_pv2x0")
+text = "White"
+horizontal_alignment = 1
+
+[node name="white_ilegal_move_1" type="Sprite2D" parent="white_log" unique_id=1455145490]
+visible = false
+position = Vector2(93, -44)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
+[node name="white_ilegal_move_2" type="Sprite2D" parent="white_log" unique_id=347414518]
+visible = false
+position = Vector2(185, -44)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
+[node name="white_scroll" type="ScrollContainer" parent="white_log" unique_id=805103689]
+layout_mode = 0
+offset_right = 293.0
+offset_bottom = 491.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wqy2q")
+
+[node name="white_moves_log" type="VBoxContainer" parent="white_log/white_scroll" unique_id=1093239899]
+layout_mode = 2
+
+[node name="black_log" type="Control" parent="." unique_id=591642070]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1003.0
+offset_top = -488.0
+offset_right = 1347.0
+script = ExtResource("3_8gbba")
+
+[node name="black_label" type="RichTextLabel" parent="black_log" unique_id=1705744545]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -160.0
+offset_right = 6.0
+offset_bottom = 4.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 75
+theme_override_styles/normal = SubResource("StyleBoxFlat_ijquq")
+text = "Black"
+horizontal_alignment = 1
+
+[node name="black_scroll" type="ScrollContainer" parent="black_log" unique_id=908626316]
+layout_mode = 0
+offset_right = 345.0
+offset_bottom = 486.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_43183")
+
+[node name="black_moves_log" type="VBoxContainer" parent="black_log/black_scroll" unique_id=1486097142]
+layout_mode = 2
+
+[node name="black_ilegal_move_1" type="Sprite2D" parent="black_log" unique_id=977253117]
+visible = false
+position = Vector2(124, -42.799988)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
+
+[node name="black_ilegal_move_2" type="Sprite2D" parent="black_log" unique_id=1156879097]
+visible = false
+position = Vector2(216, -42.799988)
+scale = Vector2(0.1, 0.096)
+texture = ExtResource("3_jjvhh")
