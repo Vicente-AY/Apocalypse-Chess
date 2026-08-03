@@ -8,20 +8,25 @@ const BOARD_PIXEL_SIZE = 640
 #texturas
 const TEXTURE_HOLDER = preload("res://Scenes/texture_holder.tscn")
 
+#piezas
 const BKnight = preload("res://Assets/BKnight.svg")
 const BPawn = preload("res://Assets/BPawn.svg")
 
 const WKnight = preload("res://Assets/WKnight.svg")
 const WPawn = preload("res://Assets/WPawn.svg")
 
+#marcador de movimiento posible
 const PIECE_MOVE = preload("uid://byowoqtvl4a85")
 
+#escenas de fin de juego
 const white_win_scene = preload("res://Scenes/white_win.tscn")
 const black_win_scene = preload("res://Scenes/black_win.tscn")
 const draw_scene = preload("res://Scenes/draw.tscn")
 
+#instancia de fin de juego
 var endgame_instance: Window = null
 
+#turno de la partida
 var turn_num = 1
 @onready var canvas_layer: CanvasLayer = $"../../../.."
 
@@ -29,23 +34,27 @@ var turn_num = 1
 @onready var dots = $Dots
 @onready var turn = $Turn
 
+#log de movimientos
 @onready var white_scroll: ScrollContainer = $"../../../right_panel/white_log/white_scroll"
 @onready var white_moves_log: VBoxContainer = $"../../../right_panel/white_log/white_scroll/white_moves_log"
 @onready var black_scroll: ScrollContainer = $"../../../right_panel/black_log/black_scroll"
 @onready var black_moves_log: VBoxContainer = $"../../../right_panel/black_log/black_scroll/black_moves_log"
 
+#marcadores de movimiento ilegal
 @onready var white_ilegal_move_1: Sprite2D = $"../../../right_panel/white_log/white_ilegal_move_1"
 @onready var white_ilegal_move_2: Sprite2D = $"../../../right_panel/white_log/white_ilegal_move_2"
 @onready var black_ilegal_move_1: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_1"
 @onready var black_ilegal_move_2: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_2"
 
+#marcador visual de turno
 @onready var white_turn_label: RichTextLabel = $"../../../../white_turn_label"
 @onready var black_turn_label: RichTextLabel = $"../../../../black_turn_label"
 
+#boton para reabrir la escena de fin de juego
 @onready var reopen_button: Button = $"../../../../reopen_button"
 
+#variables
 const LOG_FONT_SIZE = 20
-
 var board : Array
 #true white turn, false black turn
 var white = true
@@ -63,7 +72,7 @@ var black_pen_points = 0
 var white_move = []
 var black_move = []
 
-#variable que indica que el juego ha finalizado y su resultado
+#diccionario que indica que el juego ha finalizado y su resultado
 var finished = {
 	"w_win": false,
 	"b_win": false,
@@ -90,6 +99,7 @@ func _ready():
 	
 	display_board()
 
+#funcion que gestiona los clicks de los jugadores
 func _input(event):
 	
 	#posicion del cursor horizonal y vertial
@@ -130,7 +140,7 @@ func _input(event):
 			selectPiece = false;
 	#si no estamos en la fase de seleccionar pieza movemos
 	else:
-		#set_moves(vMousePosition, hMousePosition)
+		#set_moves(vMousePosition, hMousePosition) deprecated
 		plan_move(vMousePosition, hMousePosition)
 
 #funcion que establece si el ratón está dentro o fura del tablero
@@ -152,7 +162,7 @@ func display_board():
 		for j in BOARD_SIZE:
 			put_pieces(i, j)
 
-#funcion auxiliar que pone las piezas según su textura
+#funcion auxiliar que pone las piezas en su posición según su textura
 func put_pieces(i, j):
 	var holder = TEXTURE_HOLDER.instantiate()
 	holder.scale = Vector2(2, 2)
@@ -543,6 +553,7 @@ func get_pawn_moves():
 #con las reglas de promocion
 func get_all_posible_moves():
 	
+	#listado de movimientos posibles
 	var _moves = []
 	
 	#hacemos un for con las filas
@@ -562,6 +573,7 @@ func get_all_posible_moves():
 #funcion que devuelve los posibles movimientos del caballero
 func get_knight_moves():
 	
+	#listado de movimientos posibles
 	var _moves = []
 	
 	#establecesmo todos los posibles movimientos del caballero
@@ -587,12 +599,14 @@ func is_valid_pos(pos : Vector2):
 
 #funcion que establece si una casilla está ocupada por una pieza
 func is_empty(pos : Vector2):
+	
 	if(board[pos.x][pos.y] == 0):
 		return true
 	return false
 
 #funcion que establece si una casilla está ocupada por una pieza enemiga
 func is_enemy(pos: Vector2):
+	
 	if(white):
 		if(board[pos.x][pos.y] < 0):
 			return true
@@ -604,6 +618,7 @@ func is_enemy(pos: Vector2):
 
 #funcion que establece si una casilla está ocupada por una pieza aliada
 func is_ally(pos: Vector2):
+	
 	if(white):
 		if(board[pos.x][pos.y] > 0):
 			return true
@@ -616,6 +631,7 @@ func is_ally(pos: Vector2):
 #funcion que muestra sobre la textura del tablero la textura PIECE_MOVE
 #para que el jugador vea las posiciones donde se puede mover
 func show_available_moves():
+	
 	for i in moves:
 		var holder = TEXTURE_HOLDER.instantiate()
 		dots.add_child(holder)
@@ -627,11 +643,13 @@ func show_available_moves():
 
 #funcion que borra la textura del tablero
 func delete_available_moves():
+	
 	for child in dots.get_children():
 		child.queue_free()
 
 #funcion que establece y devuelve un diccionario y cuenta las piezas del tablero actual
 func count_pieces() -> Dictionary:
+	
 	var counts = {
 		"white_pawns": 0,
 		"white_knights": 0,
@@ -684,6 +702,7 @@ func get_pawn_legal_moves(count: Dictionary, piece: Vector2, is_white: bool):
 func get_knight_legal_moves(piece: Vector2, is_white: bool):
 	
 	var _moves = []
+	
 	var directions = [Vector2(2, 1), Vector2(2, -1), Vector2(1, 2), Vector2(-1, 2),
 	Vector2(-2, 1), Vector2(-2, -1), Vector2(-1, -2), Vector2(1, -2)]
 	
@@ -709,14 +728,14 @@ func check_victory():
 	var count = count_pieces()
 	
 	#si ambos jugadores se quedan sin peones o llegan a dos puntos de penalización al mismo tiempo
-	#lo clasificamos como empate y cambiamos la escena a la de empate
+	#lo clasificamos como empate y cambiamos la escena de fin de juego a la de empate
 	if ((count["black_pawns"] < 1 && count["white_pawns"] < 1) || (white_pen_points > 1 && black_pen_points > 1)):
 		print("Draw!")
 		finished["draw"] = true
 		show_end_screen(draw_scene)
 		return
 	#en caso que se eliminen antes todos los peones de un jugador o alguno llege a dos puntos de penalizacion
-	#cambiamos la escena para dicho jugador
+	#cambiamos la escena a la victoria de dicho jugador
 	if (count["black_pawns"] < 1  || black_pen_points > 1):
 		print("White Victory!")
 		finished["w_win"] = true
@@ -752,7 +771,9 @@ func check_victory():
 					black_has_move = true
 	
 	#regla adicional
+	#si alguno de los jugadores se queda sin movimientos legales pierde
 	#si ninguno de los jugadores tiene movimientos legales se establecen tablas
+	#cambiamos la escena en consecuencia
 	if(!white_has_move && !black_has_move):
 		print("Draw!")
 		finished["draw"] = true
@@ -767,19 +788,24 @@ func check_victory():
 		finished["w_win"] = true
 		show_end_screen(white_win_scene)
 
+#funcion que muestra la pantalla de fin de partida recibiendo la escena de la
+#funcion anterior
 func show_end_screen(scene: PackedScene) -> void:
 	
 	endgame_instance = scene.instantiate()
 	canvas_layer.add_child(endgame_instance)
 	endgame_instance.show()
 	endgame_instance.close_requested.connect(_on_end_screen_closed)
-	
 
+#funcion que oculta el boton de reabrir la ventana de fin de juego 
+#si se presiona y abre la ventana
 func _on_reopen_button_pressed() -> void:
 	
 	endgame_instance.show()
 	reopen_button.hide()
 
+#funcion que oculta la ventana de cerrarse (la x de la esquina)
+#y muestra el boton de reabrir
 func _on_end_screen_closed() -> void:
 	
 	endgame_instance.hide()
@@ -795,29 +821,36 @@ func translate_pos(pos: Vector2):
 	
 	return col_letter + row_number
 
+#funcion que escribe un movimiento en la lista de movimientos
 func write_log(_piece: Vector2, _dest: Vector2, _piece_val: int, is_white: bool, ilegal_m: bool, ilegal_prom: bool, double_pawn_c: bool):
 	
 	var text = ""
 	
+	#escribimos la traduccion de la posicion inicial y su destino
 	text = translate_pos(_piece) + " -> " + translate_pos(_dest)
 	
+	#escribimos el turno y el texto anterior
 	var log_text = "Turn " + str(turn_num) + " " + text + "\n"
 	
+	#añadimos el label
 	var label = Label.new()
 	label.text = log_text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.add_theme_font_size_override("font_size", LOG_FONT_SIZE)
+	#el color por defecto es negro pero si escribe en el listado de las negras escribimos en blanco
 	label.add_theme_color_override("font_color", Color.BLACK if is_white else Color.WHITE)
 	
 	#comprobamos si hay movimiento o promocion ilegal o si ambos jugadores han intentando captuarse ilegalmente
+	#si es asi el color de fondo del movimiento estará en rojo
 	if (ilegal_m || ilegal_prom || double_pawn_c):
 		var background = StyleBoxFlat.new()
 		background.bg_color = Color.RED
 		
 		label.add_theme_stylebox_override("normal", background)
 	
+	#dependiendo del jugador escribimos en un listado o en otro
 	if(is_white):
 		white_moves_log.add_child(label)
 		_scroll_to_bottom(white_scroll)
