@@ -39,6 +39,9 @@ var turn_num = 1
 @onready var black_ilegal_move_1: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_1"
 @onready var black_ilegal_move_2: Sprite2D = $"../../../right_panel/black_log/black_ilegal_move_2"
 
+@onready var white_turn_label: RichTextLabel = $"../../../../white_turn_label"
+@onready var black_turn_label: RichTextLabel = $"../../../../black_turn_label"
+
 @onready var reopen_button: Button = $"../../../../reopen_button"
 
 const LOG_FONT_SIZE = 20
@@ -219,12 +222,16 @@ func plan_move(vMousePos, hMousePos):
 		white_move.append(target_move)
 		delete_available_moves()
 		selectPiece = true
+		white_turn_label.hide()
+		black_turn_label.show()
 		white = !white
 	else:
 		black_move.append(selected_piece)
 		black_move.append(target_move)
 		delete_available_moves()
 		selectPiece = true
+		white_turn_label.show()
+		black_turn_label.hide()
 		white = !white
 		#en caso de acabar el turno de las negras resolvemos el turno, actualizamos las texturas
 		#y borramos los movimientos de los jugadores

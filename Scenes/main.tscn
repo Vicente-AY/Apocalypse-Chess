@@ -41,6 +41,12 @@ corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bp64"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bp64"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrfnm"]
+bg_color = Color(1, 1, 1, 1)
+
 [node name="Main" type="Node2D" unique_id=767903281]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1632539900]
@@ -158,3 +164,18 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_21xkr")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_6bp64")
 text = "Reopen endgame
  screen"
+
+[node name="white_turn_label" type="RichTextLabel" parent="CanvasLayer" unique_id=2044621574]
+offset_left = 716.0
+offset_top = 93.0
+offset_right = 874.0
+offset_bottom = 111.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_6bp64")
+
+[node name="black_turn_label" type="RichTextLabel" parent="CanvasLayer" unique_id=1752499179]
+visible = false
+offset_left = 1045.0
+offset_top = 93.0
+offset_right = 1203.0
+offset_bottom = 111.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_xrfnm")
